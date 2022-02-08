@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import css from './ImageGallery.module.css';
 const ImageGallery = ({ images }) => {
-  console.log(images);
-
   return (
     <>
       <ul className={css.imageGallery}>

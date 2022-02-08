@@ -80,10 +80,9 @@ class App extends Component {
       <>
         <ToastContainer autoClose={3000} />
         <SearchBar onSearch={this.formSubmit} />
-
         {photos && <ImageGallery images={photos} />}
-        {loading && <Loader></Loader>}
-        {photos && <Button click={this.onLoadMOre} />}
+        {loading && <Loader />}
+        {photos.length > 0 && <Button click={this.onLoadMOre} />}
       </>
     );
   }

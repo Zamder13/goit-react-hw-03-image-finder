@@ -5,7 +5,7 @@ import css from './Searchbar.module.css';
 
 class SearchBar extends Component {
   state = {
-    query: null,
+    query: '',
   };
 
   handleSearch = event => {
@@ -15,9 +15,11 @@ class SearchBar extends Component {
   handleSubmit = event => {
     event.preventDefault();
     this.props.onSearch(this.state.query);
+    this.setState({ query: '' });
   };
 
   render() {
+    const { query } = this.state;
     return (
       <header className={css.searchbar}>
         <form className={css.searchForm} onSubmit={this.handleSubmit}>
@@ -29,6 +31,7 @@ class SearchBar extends Component {
             className={css.searchForm_input}
             type="text"
             autoComplete="off"
+            value={query}
             autoFocus
             placeholder="Search images and photos"
             onChange={this.handleSearch}

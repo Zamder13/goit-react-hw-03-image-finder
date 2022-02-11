@@ -6,7 +6,6 @@ import Button from '../Button/Button';
 import Loader from '../Loader/Loader';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import PropTypes from 'prop-types';
 
 class App extends Component {
   state = {
@@ -31,6 +30,7 @@ class App extends Component {
     if (prevQuery !== query) {
       if (prevPhotos !== '') {
         this.setState({ photos: '', page: 1 });
+        return;
       }
 
       this.updateState();
@@ -44,8 +44,11 @@ class App extends Component {
     setTimeout(() => {
       fetchPhotos(query, page)
         .then(data => {
+          console.log(data);
           if (data.length === 0) {
             toast.info('Sorry, not found');
+            // this.setState({ query: '' });
+            return;
           }
           this.setState(({ photos }) => ({
             photos: [...photos, ...data],
@@ -87,16 +90,5 @@ class App extends Component {
     );
   }
 }
-
-App.propTypes = {
-  state: PropTypes.arrayOf(
-    PropTypes.shape({
-      photos: PropTypes.string.isRequired,
-      query: PropTypes.string.isRequired,
-      page: PropTypes.string.isRequired,
-      error: PropTypes.string.isRequired,
-    }),
-  ),
-};
 
 export default App;
